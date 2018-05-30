@@ -39,23 +39,28 @@
           <div>{{startDate}}</div>
           <div>{{days}}</div>
           <div>{{locale}}</div>
+          <!-- <div v-for="month in months">
+            <div v-for="day in month.days" class="day">{{day}}</div>
+          </div> -->
         </div>
       </div>
     </div>
     </div>
   </div>
 
+  <script src="functions.js"></script>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
         startDate: "",
         days: "",
-        locale: ""
+        locale: "",
+
       },
       methods: {
         "render": function() {
-          console.log("I'm Rendering");
+          console.log(processDate(this.startDate, this.days));
         }
       }
     })
