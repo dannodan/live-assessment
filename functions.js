@@ -7,9 +7,6 @@ function processDate(date, days) {
 
     endDate.setDate(Number(endDate.getDate()) + Number(days));
 
-    console.log(startDate)
-    console.log(endDate);
-
     return processMonths(startDate, endDate);
 
 }
@@ -52,14 +49,11 @@ function processMonths(start, end) {
         var pastId = id;
     }
 
-
     return Array.from(months.values());
 
 }
 
 function processDay(date) {
-
-    console.log(date.getDay());
 
     var isWeekend = (date.getDay() === 6 || date.getDay() === 0);
 
@@ -68,7 +62,7 @@ function processDay(date) {
         "weekend": isWeekend
     };
 
-    return output
+    return output;
 
 }
 
@@ -87,5 +81,5 @@ function nameMonth(month) {
         'November',
         'December'
     ]
-    return array[month]
+    return array[month];
 }

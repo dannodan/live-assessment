@@ -1,12 +1,35 @@
 .day {
     width: 14.28%;
-    background: green;
+    background:  #77dd66;
+    border: 1px solid white;
 }
 
 .weekend {
-    background: yellow;
+    background: #fff666;
 }
 
 .offset {
-    background: gray;
+    background: #aaa;
+}
+
+.calendar-container {
+    width: 100%;
+}
+
+.month-title {
+    border-bottom: 1px solid black;
+}
+
+.month-container {
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 2px
+}
+
+.full-screen {
+    width: 100%;
+}
+
+form {
+    margin: 20px 0;
 }
