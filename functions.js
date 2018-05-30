@@ -1,7 +1,9 @@
 function processDate(date, days) {
     
-    var startDate = new Date(date);
-    var endDate = new Date(date);
+    var momentDate = moment(date);
+
+    var startDate = momentDate.toDate();
+    var endDate = momentDate.toDate();
 
     endDate.setDate(Number(endDate.getDate()) + Number(days));
 
@@ -18,21 +20,38 @@ function processMonths(start, end) {
     var endMonth = Number(end.getMonth());
 
     var months = new Map();
+    var id;
 
-    while (start <= end) {
-        var id = nameMonth(start.getMonth())+start.getFullYear();
+    while (start < end) {
+        id = nameMonth(start.getMonth())+start.getFullYear();
         if (!months.get(id)) {
             months.set(id, {
                 "days": [],
                 "name": nameMonth(start.getMonth()),
                 "year": start.getFullYear(),
-                "startOffset": "",
-                "endOffset": ""
+                "startOffset": [],
+                "endOffset": []
             });
+            for (var i = 0; i < start.getDay(); i++) {
+                months.get(id).startOffset.push(i);
+            }
+            console.log(pastId);
+            if (!!pastId) {
+                for (var i = 7; i > months.get(id).startOffset.length; i--) {
+                    months.get(pastId).endOffset.push(i);
+                }
+            }
+            if (start.getMonth() === end.getMonth()) {
+                for (var i = 7; i > end.getDay(); i--) {
+                    months.get(id).endOffset.push(i);
+                }
+            }
         }
         months.get(id).days.push(processDay(start));
         start.setDate(start.getDate()+1);
+        var pastId = id;
     }
+
 
     return Array.from(months.values());
 
@@ -40,7 +59,9 @@ function processMonths(start, end) {
 
 function processDay(date) {
 
-    var isWeekend = (date.getDay() > 4);
+    console.log(date.getDay());
+
+    var isWeekend = (date.getDay() === 6 || date.getDay() === 0);
 
     var output = {
         "number": date.getDate(),
@@ -52,43 +73,19 @@ function processDay(date) {
 }
 
 function nameMonth(month) {
-    switch (month) {
-        case (0):
-            return "January"
-            break
-        case (1):
-            return "February"
-            break
-        case (2):
-            return "March"
-            break
-        case (3):
-            return "April"
-            break
-        case (4):
-            return "May"
-            break
-        case (5):
-            return "June"
-            break
-        case (6):
-            return "July"
-            break
-        case (7):
-            return "August"
-            break
-        case (8):
-            return "September"
-            break
-        case (9):
-            return "October"
-            break
-        case (10):
-            return "November"
-            break
-        case (11):
-            return "December"
-            break
-    }
-    return
+    var array = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ]
+    return array[month]
 }

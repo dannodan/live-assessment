@@ -1,0 +1,12 @@
+.day {
+    width: 14.28%;
+    background: green;
+}
+
+.weekend {
+    background: yellow;
+}
+
+.offset {
+    background: gray;
+}
